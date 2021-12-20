@@ -24,10 +24,7 @@ export default function ChatsScreen() {
             id: userInfo.attributes.sub,
           })
         );
-        console.log(
-          'hello 💰🧚🏿‍♀️📀 this userData.data',
-          userData.data.getUser.chatRoomUser.items
-        );
+
         setChatRooms(userData.data.getUser.chatRoomUser.items);
       } catch (e) {
         console.log(e);

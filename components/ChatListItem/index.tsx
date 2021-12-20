@@ -15,9 +15,6 @@ const ChatListItem = (props: ChatListItemProps) => {
   const [otherUser, setOtherUser] = useState(null);
 
   const navigation = useNavigation();
-  console.log('💃€💰', chatRoom);
-  console.log('from chatscreen 🦑📉💥', chatRoom.chatRoom.chatRoomUsers.items);
-  // console.log(chatRoom.chatRoomUsers.items[1]);
 
   useEffect(() => {
     const getOtherUser = async () => {
@@ -30,7 +27,6 @@ const ChatListItem = (props: ChatListItemProps) => {
       } else {
         setOtherUser(chatRoom.chatRoom.chatRoomUsers.items[0].user);
       }
-      console.log(`This is UserInfo 💥🧚🏻‍♂️💃 ${userInfo.attributes.sub}`);
     };
 
     getOtherUser();
@@ -42,7 +38,6 @@ const ChatListItem = (props: ChatListItemProps) => {
       name: otherUser.name,
     });
     const userInfo = Auth.currentAuthenticatedUser();
-    console.log(`this is ${otherUser.id}`);
   };
 
   if (!otherUser) {

@@ -1,5 +1,12 @@
-import React from 'react';
-import { FlatList, Text, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  FlatList,
+  Text,
+  ImageBackground,
+  KeyboardAvoidingView,
+} from 'react-native';
+
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 
 import { useRoute } from '@react-navigation/native';
 

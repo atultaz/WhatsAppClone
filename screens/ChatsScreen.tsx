@@ -3,11 +3,38 @@ import { FlatList, StyleSheet, Text, Pressable } from 'react-native';
 import { View } from '../components/Themed';
 import ChatListItem from '../components/ChatListItem';
 
-import chatRooms from '../data/ChatRooms';
+// import chatRooms from '../data/ChatRooms';
 import NewMessageButton from '../components/NewMessageButton';
-import { Auth } from 'aws-amplify';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+
+import { useEffect, useState } from 'react';
+
+import { getUser } from './queries';
 
 export default function ChatsScreen() {
+  const [chatRooms, setChatRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchChatRooms = async () => {
+      try {
+        const userInfo = await Auth.currentAuthenticatedUser();
+
+        const userData = await API.graphql(
+          graphqlOperation(getUser, {
+            id: userInfo.attributes.sub,
+          })
+        );
+        console.log(
+          'hello 💰🧚🏿‍♀️📀 this userData.data',
+          userData.data.getUser.chatRoomUser.items
+        );
+        setChatRooms(userData.data.getUser.chatRoomUser.items);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchChatRooms();
+  }, []);
   const logOut = () => {
     Auth.signOut();
   };

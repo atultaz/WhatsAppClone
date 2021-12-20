@@ -7,4 +7,48 @@ type User
   name: String!
   imageUri: String
   status: String!
+  chatRoomUser: [ChatRoomUser] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type ChatRoomUser
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+  @aws_cognito_user_pools {
+  # @key(name: "byUser", fields: ["userID", "chatRoomID"])
+  # @key(name: "byChatRoom", fields: ["chatRoomID", "userID"])
+  id: ID!
+  userID: ID! @index(name: "byUser", sortKeyFields: ["chatRoomID"])
+  chatRoomID: ID! @index(name: "byChatRoom", sortKeyFields: ["userID"])
+  user: User @hasOne(fields: ["userID"])
+  chatRoom: ChatRoom @hasOne(fields: ["chatRoomID"])
+}
+
+type ChatRoom
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+  @aws_cognito_user_pools {
+  id: ID!
+  chatRoomUsers: [ChatRoomUser]
+    @hasMany(indexName: "byChatRoom", fields: ["id"])
+  messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
+  lastMessageID: ID!
+  lastMessage: Message @hasOne(fields: ["lastMessageID"])
+}
+
+type Message
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+  @aws_cognito_user_pools {
+  id: ID!
+  createdAt: String!
+  content: String!
+  userID: ID!
+  chatRoomID: ID!
+    @index(
+      name: "byChatRoom"
+      sortKeyFields: ["createdAt"]
+      queryField: "messagesByChatRoom"
+    )
+  user: User @hasOne(fields: ["userID"])
+  chatRoom: ChatRoom @hasOne(fields: ["chatRoomID"])
 }

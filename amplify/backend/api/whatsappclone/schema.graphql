@@ -1,0 +1,10 @@
+type User
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+  @aws_cognito_user_pools {
+  # @aws_iam
+  id: ID!
+  name: String!
+  imageUri: String
+  status: String!
+}

@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, Pressable } from 'react-native';
 import { View } from '../components/Themed';
 import ChatListItem from '../components/ChatListItem';
 
-// import chatRooms from '../data/ChatRooms';
+import chatRooms from '../data/ChatRooms';
 import NewMessageButton from '../components/NewMessageButton';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 
@@ -24,7 +24,6 @@ export default function ChatsScreen() {
             id: userInfo.attributes.sub,
           })
         );
-
         setChatRooms(userData.data.getUser.chatRoomUser.items);
       } catch (e) {
         console.log(e);
@@ -40,7 +39,7 @@ export default function ChatsScreen() {
       <FlatList
         style={{ width: '100%' }}
         data={chatRooms}
-        renderItem={({ item }) => <ChatListItem chatRoom={item} />}
+        renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
         keyExtractor={(item) => item.id}
       />
       <NewMessageButton />

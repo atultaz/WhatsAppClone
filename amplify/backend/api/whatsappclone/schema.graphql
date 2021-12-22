@@ -1,54 +1,98 @@
-type User
-  @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
-  @aws_cognito_user_pools {
-  # @aws_iam
+# type User
+#   @model
+#   @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+#   @aws_cognito_user_pools {
+#   # @aws_iam
+#   id: ID!
+#   name: String!
+#   imageUri: String
+#   status: String!
+#   chatRoomUser: [ChatRoomUser] @hasMany(indexName: "byUser", fields: ["id"])
+# }
+
+# type ChatRoomUser
+#   @model
+#   @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+#   @aws_cognito_user_pools {
+#   # @key(name: "byUser", fields: ["userID", "chatRoomID"])
+#   # @key(name: "byChatRoom", fields: ["chatRoomID", "userID"])
+#   id: ID!
+#   userID: ID! @index(name: "byUser", sortKeyFields: ["chatRoomID"])
+#   chatRoomID: ID! @index(name: "byChatRoom", sortKeyFields: ["userID"])
+#   user: User @belongsTo(fields: ["userID"])
+#   chatRoom: ChatRoom @belongsTo(fields: ["chatRoomID"])
+# }
+
+# type ChatRoom
+#   @model
+#   @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+#   @aws_cognito_user_pools {
+#   id: ID!
+#   chatRoomUsers: [ChatRoomUser]
+#     @hasMany(indexName: "byChatRoom", fields: ["id"])
+#   messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
+#   lastMessageID: ID
+#   lastMessage: Message @hasOne(fields: ["lastMessageID"])
+# }
+
+# type Message
+#   @model
+#   @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
+#   @aws_cognito_user_pools {
+#   id: ID!
+#   createdAt: String!
+#   content: String!
+#   userID: ID!
+#   chatRoomID: ID!
+#     @index(
+#       name: "byChatRoom"
+#       sortKeyFields: ["createdAt"]
+#       queryField: "messagesByChatRoom"
+#     )
+#   user: User @hasOne(fields: ["userID"])
+#   chatRoom: ChatRoom @belongsTo(fields: ["chatRoomID"])
+# }
+
+type User @model {
   id: ID!
   name: String!
   imageUri: String
-  status: String!
-  chatRoomUser: [ChatRoomUser] @hasMany(indexName: "byUser", fields: ["id"])
+  status: String
+  chatRoomUser: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type ChatRoomUser
   @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
-  @aws_cognito_user_pools {
-  # @key(name: "byUser", fields: ["userID", "chatRoomID"])
-  # @key(name: "byChatRoom", fields: ["chatRoomID", "userID"])
+  @key(name: "byUser", fields: ["userID", "chatRoomID"])
+  @key(name: "byChatRoom", fields: ["chatRoomID", "userID"]) {
   id: ID!
-  userID: ID! @index(name: "byUser", sortKeyFields: ["chatRoomID"])
-  chatRoomID: ID! @index(name: "byChatRoom", sortKeyFields: ["userID"])
-  user: User @hasOne(fields: ["userID"])
-  chatRoom: ChatRoom @hasOne(fields: ["chatRoomID"])
+  userID: ID!
+  chatRoomID: ID!
+  user: User @connection(fields: ["userID"])
+  chatRoom: ChatRoom @connection(fields: ["chatRoomID"])
 }
 
-type ChatRoom
-  @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
-  @aws_cognito_user_pools {
+type ChatRoom @model {
   id: ID!
   chatRoomUsers: [ChatRoomUser]
-    @hasMany(indexName: "byChatRoom", fields: ["id"])
-  messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
+    @connection(keyName: "byChatRoom", fields: ["id"])
+  messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
   lastMessageID: ID!
-  lastMessage: Message @hasOne(fields: ["lastMessageID"])
+  lastMessage: Message @connection(fields: ["lastMessageID"])
 }
 
 type Message
   @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }])
-  @aws_cognito_user_pools {
+  @key(
+    name: "byChatRoom"
+    fields: ["chatRoomID", "createdAt"]
+    queryField: "messagesByChatRoom"
+  ) {
   id: ID!
   createdAt: String!
   content: String!
   userID: ID!
   chatRoomID: ID!
-    @index(
-      name: "byChatRoom"
-      sortKeyFields: ["createdAt"]
-      queryField: "messagesByChatRoom"
-    )
-  user: User @hasOne(fields: ["userID"])
-  chatRoom: ChatRoom @hasOne(fields: ["chatRoomID"])
+  user: User @connection(fields: ["userID"])
+  chatRoom: ChatRoom @connection(fields: ["chatRoomID"])
 }

@@ -16,13 +16,11 @@ export const getUser = /* GraphQL */ `
           chatRoomID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -43,7 +41,6 @@ export const listUsers = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -65,7 +62,6 @@ export const getChatRoomUser = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
       chatRoom {
         id
@@ -83,15 +79,12 @@ export const getChatRoomUser = /* GraphQL */ `
           userID
           chatRoomID
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -113,18 +106,15 @@ export const listChatRoomUsers = /* GraphQL */ `
           status
           createdAt
           updatedAt
-          owner
         }
         chatRoom {
           id
           lastMessageID
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -141,7 +131,6 @@ export const getChatRoom = /* GraphQL */ `
           chatRoomID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -153,7 +142,6 @@ export const getChatRoom = /* GraphQL */ `
           userID
           chatRoomID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -171,21 +159,17 @@ export const getChatRoom = /* GraphQL */ `
           status
           createdAt
           updatedAt
-          owner
         }
         chatRoom {
           id
           lastMessageID
           createdAt
           updatedAt
-          owner
         }
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -212,11 +196,9 @@ export const listChatRooms = /* GraphQL */ `
           userID
           chatRoomID
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -240,7 +222,6 @@ export const getMessage = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
       chatRoom {
         id
@@ -258,14 +239,11 @@ export const getMessage = /* GraphQL */ `
           userID
           chatRoomID
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
       }
       updatedAt
-      owner
     }
   }
 `;
@@ -289,17 +267,14 @@ export const listMessages = /* GraphQL */ `
           status
           createdAt
           updatedAt
-          owner
         }
         chatRoom {
           id
           lastMessageID
           createdAt
           updatedAt
-          owner
         }
         updatedAt
-        owner
       }
       nextToken
     }
@@ -335,17 +310,14 @@ export const messagesByChatRoom = /* GraphQL */ `
           status
           createdAt
           updatedAt
-          owner
         }
         chatRoom {
           id
           lastMessageID
           createdAt
           updatedAt
-          owner
         }
         updatedAt
-        owner
       }
       nextToken
     }

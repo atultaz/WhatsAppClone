@@ -6,7 +6,7 @@ export type CreateUserInput = {
   id?: string | null,
   name: string,
   imageUri?: string | null,
-  status: string,
+  status?: string | null,
 };
 
 export type ModelUserConditionInput = {
@@ -63,11 +63,10 @@ export type User = {
   id: string,
   name: string,
   imageUri?: string | null,
-  status: string,
+  status?: string | null,
   chatRoomUser?: ModelChatRoomUserConnection | null,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type ModelChatRoomUserConnection = {
@@ -85,7 +84,6 @@ export type ChatRoomUser = {
   chatRoom?: ChatRoom | null,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type ChatRoom = {
@@ -97,7 +95,6 @@ export type ChatRoom = {
   lastMessage?: Message | null,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type ModelMessageConnection = {
@@ -116,7 +113,6 @@ export type Message = {
   user?: User | null,
   chatRoom?: ChatRoom | null,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type UpdateUserInput = {
@@ -298,7 +294,7 @@ export type CreateUserMutation = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -308,13 +304,11 @@ export type CreateUserMutation = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -329,7 +323,7 @@ export type UpdateUserMutation = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -339,13 +333,11 @@ export type UpdateUserMutation = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -360,7 +352,7 @@ export type DeleteUserMutation = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -370,13 +362,11 @@ export type DeleteUserMutation = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -396,14 +386,13 @@ export type CreateChatRoomUserMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -425,15 +414,12 @@ export type CreateChatRoomUserMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -453,14 +439,13 @@ export type UpdateChatRoomUserMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -482,15 +467,12 @@ export type UpdateChatRoomUserMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -510,14 +492,13 @@ export type DeleteChatRoomUserMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -539,15 +520,12 @@ export type DeleteChatRoomUserMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -569,7 +547,6 @@ export type CreateChatRoomMutation = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -583,7 +560,6 @@ export type CreateChatRoomMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -600,10 +576,9 @@ export type CreateChatRoomMutation = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -611,14 +586,11 @@ export type CreateChatRoomMutation = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -640,7 +612,6 @@ export type UpdateChatRoomMutation = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -654,7 +625,6 @@ export type UpdateChatRoomMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -671,10 +641,9 @@ export type UpdateChatRoomMutation = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -682,14 +651,11 @@ export type UpdateChatRoomMutation = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -711,7 +677,6 @@ export type DeleteChatRoomMutation = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -725,7 +690,6 @@ export type DeleteChatRoomMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -742,10 +706,9 @@ export type DeleteChatRoomMutation = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -753,14 +716,11 @@ export type DeleteChatRoomMutation = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -782,14 +742,13 @@ export type CreateMessageMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -811,14 +770,11 @@ export type CreateMessageMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -840,14 +796,13 @@ export type UpdateMessageMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -869,14 +824,11 @@ export type UpdateMessageMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -898,14 +850,13 @@ export type DeleteMessageMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -927,14 +878,11 @@ export type DeleteMessageMutation = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -948,7 +896,7 @@ export type GetUserQuery = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -958,13 +906,11 @@ export type GetUserQuery = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -982,14 +928,13 @@ export type ListUsersQuery = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
@@ -1010,14 +955,13 @@ export type GetChatRoomUserQuery = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1039,15 +983,12 @@ export type GetChatRoomUserQuery = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1070,10 +1011,9 @@ export type ListChatRoomUsersQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1081,11 +1021,9 @@ export type ListChatRoomUsersQuery = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
@@ -1108,7 +1046,6 @@ export type GetChatRoomQuery = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1122,7 +1059,6 @@ export type GetChatRoomQuery = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1139,10 +1075,9 @@ export type GetChatRoomQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1150,14 +1085,11 @@ export type GetChatRoomQuery = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1190,11 +1122,9 @@ export type ListChatRoomsQuery = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
@@ -1217,14 +1147,13 @@ export type GetMessageQuery = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1246,14 +1175,11 @@ export type GetMessageQuery = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1278,10 +1204,9 @@ export type ListMessagesQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1289,10 +1214,8 @@ export type ListMessagesQuery = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
@@ -1322,10 +1245,9 @@ export type MessagesByChatRoomQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1333,17 +1255,11 @@ export type MessagesByChatRoomQuery = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
-};
-
-export type OnCreateUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateUserSubscription = {
@@ -1352,7 +1268,7 @@ export type OnCreateUserSubscription = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -1362,18 +1278,12 @@ export type OnCreateUserSubscription = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdateUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateUserSubscription = {
@@ -1382,7 +1292,7 @@ export type OnUpdateUserSubscription = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -1392,18 +1302,12 @@ export type OnUpdateUserSubscription = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeleteUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteUserSubscription = {
@@ -1412,7 +1316,7 @@ export type OnDeleteUserSubscription = {
     id: string,
     name: string,
     imageUri?: string | null,
-    status: string,
+    status?: string | null,
     chatRoomUser?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -1422,18 +1326,12 @@ export type OnDeleteUserSubscription = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnCreateChatRoomUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateChatRoomUserSubscription = {
@@ -1447,14 +1345,13 @@ export type OnCreateChatRoomUserSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1476,20 +1373,13 @@ export type OnCreateChatRoomUserSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdateChatRoomUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateChatRoomUserSubscription = {
@@ -1503,14 +1393,13 @@ export type OnUpdateChatRoomUserSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1532,20 +1421,13 @@ export type OnUpdateChatRoomUserSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeleteChatRoomUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteChatRoomUserSubscription = {
@@ -1559,14 +1441,13 @@ export type OnDeleteChatRoomUserSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1588,20 +1469,13 @@ export type OnDeleteChatRoomUserSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnCreateChatRoomSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateChatRoomSubscription = {
@@ -1617,7 +1491,6 @@ export type OnCreateChatRoomSubscription = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1631,7 +1504,6 @@ export type OnCreateChatRoomSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1648,10 +1520,9 @@ export type OnCreateChatRoomSubscription = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1659,19 +1530,12 @@ export type OnCreateChatRoomSubscription = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdateChatRoomSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateChatRoomSubscription = {
@@ -1687,7 +1551,6 @@ export type OnUpdateChatRoomSubscription = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1701,7 +1564,6 @@ export type OnUpdateChatRoomSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1718,10 +1580,9 @@ export type OnUpdateChatRoomSubscription = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1729,19 +1590,12 @@ export type OnUpdateChatRoomSubscription = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeleteChatRoomSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteChatRoomSubscription = {
@@ -1757,7 +1611,6 @@ export type OnDeleteChatRoomSubscription = {
         chatRoomID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1771,7 +1624,6 @@ export type OnDeleteChatRoomSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } >,
       nextToken?: string | null,
     } | null,
@@ -1788,10 +1640,9 @@ export type OnDeleteChatRoomSubscription = {
         id: string,
         name: string,
         imageUri?: string | null,
-        status: string,
+        status?: string | null,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       chatRoom?:  {
         __typename: "ChatRoom",
@@ -1799,19 +1650,12 @@ export type OnDeleteChatRoomSubscription = {
         lastMessageID: string,
         createdAt: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnCreateMessageSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateMessageSubscription = {
@@ -1827,14 +1671,13 @@ export type OnCreateMessageSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1856,19 +1699,12 @@ export type OnCreateMessageSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdateMessageSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateMessageSubscription = {
@@ -1884,14 +1720,13 @@ export type OnUpdateMessageSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1913,19 +1748,12 @@ export type OnUpdateMessageSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeleteMessageSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteMessageSubscription = {
@@ -1941,14 +1769,13 @@ export type OnDeleteMessageSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
-      status: string,
+      status?: string | null,
       chatRoomUser?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     chatRoom?:  {
       __typename: "ChatRoom",
@@ -1970,13 +1797,10 @@ export type OnDeleteMessageSubscription = {
         userID: string,
         chatRoomID: string,
         updatedAt: string,
-        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
